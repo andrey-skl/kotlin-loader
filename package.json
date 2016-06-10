@@ -1,0 +1,20 @@
+{
+  "name": "webpack-kotlin-loader",
+  "version": "0.1.0",
+  "description": "Webpack loader allows importing kotlin files in JS",
+  "main": "index.js",
+  "scripts": {
+    "compile-simple": "rm -rf tests/simple/dist && webpack --config tests/simple/webpack.config",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "webpack",
+    "kotlin",
+    "loader"
+  ],
+  "author": "Andrey Skladchikov",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^1.13.1"
+  }
+}
