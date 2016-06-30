@@ -1,9 +1,11 @@
+var loaderUtils = require('loader-utils');
 var kotlinCopiler = require('./kotlin-compiler');
 
 module.exports = function () {
     this.cacheable();
     var callback = this.async();
-    var filename = this.resourcePath;
+    var filename = loaderUtils.getRemainingRequest(this);
+    this.addDependency(filename);
 
     kotlinCopiler.compile(filename)
         .then(function (res) {

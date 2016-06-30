@@ -17,16 +17,21 @@ function onCompilationFinish() {
 
 function compile(sourceFilePath) {
     return new Promise(function (resolve, reject) {
-        var make = spawn('kotlinc-js', ['-output', TMP_FILE_NAME, '-meta-info', sourceFilePath], {stdio: [process.stdin, process.stdout, 'pipe']});
+        var compilation = spawn('kotlinc-js', ['-output', TMP_FILE_NAME, '-meta-info', sourceFilePath], {stdio: [process.stdin, process.stdout, 'pipe']});
         var hasErrors = false;
         var errors = '';
 
-        make.stderr.on('data', function (data) {
+        compilation.stderr.on('data', function (data) {
             hasErrors = true;
             errors += data.toString();
         });
 
-        make.on('close', function () {
+        compilation.on('error', function (err) {
+            hasErrors = true;
+            errors += 'kotlin-js failed. do you have kotlin installed?';
+        });
+
+        compilation.on('close', function () {
             if (hasErrors === false) {
                 resolve(onCompilationFinish());
             } else {
