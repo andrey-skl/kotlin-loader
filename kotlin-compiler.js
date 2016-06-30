@@ -9,7 +9,9 @@ function onCompilationFinish() {
             if (err) {
                 return reject(err);
             }
-            resolve(data);
+            fs.unlink(TMP_FILE_NAME, function () {
+                resolve(data);
+            });
         });
     });
 
@@ -17,7 +19,7 @@ function onCompilationFinish() {
 
 function compile(sourceFilePath) {
     return new Promise(function (resolve, reject) {
-        var compilation = spawn('kotlinc-js', ['-output', TMP_FILE_NAME, '-meta-info', sourceFilePath], {stdio: [process.stdin, process.stdout, 'pipe']});
+        var compilation = spawn('kotlinc-js', ['-output', TMP_FILE_NAME, sourceFilePath], {stdio: [process.stdin, process.stdout, 'pipe']});
         var hasErrors = false;
         var errors = '';
 
