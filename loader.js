@@ -1,14 +1,13 @@
-var execSync = require('child_process').execSync;
-var fs = require('fs');
+var kotlinCopiler = require('./kotlin-compiler');
 
-module.exports = function() {
+module.exports = function () {
+    this.cacheable();
+    var callback = this.async();
     var filename = this.resourcePath;
 
-    execSync(`kotlinc-js -output ${__dirname}/_tmp.js -meta-info ${filename}`);
-
-    var result = fs.readFileSync(__dirname + '/_tmp.js');
-
-    execSync(`rm ${__dirname}/_tmp.js`);
-
-    return result;
+    kotlinCopiler.compile(filename)
+        .then(function (res) {
+            callback(null, res)
+        })
+        .catch(callback);
 };
