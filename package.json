@@ -4,8 +4,8 @@
   "description": "Webpack loader allows importing kotlin files in JS",
   "main": "index.js",
   "scripts": {
-    "compile-simple": "rm -rf tests/simple/dist && webpack --config tests/simple/webpack.config",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile-simple": "rm -rf examples/simple/dist && webpack --config examples/simple/webpack.config",
+    "test": "bash ./acceptance-test.sh"
   },
   "keywords": [
     "webpack",
