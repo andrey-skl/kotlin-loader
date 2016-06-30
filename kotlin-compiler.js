@@ -4,10 +4,10 @@ var fs = require('fs');
 var TMP_FILE_NAME = `${__dirname}/_tmp.js`;
 
 function onCompilationFinish() {
-    return new Promise(function (resolve) {
+    return new Promise(function (resolve, reject) {
         fs.readFile(TMP_FILE_NAME, function (err, data) {
             if (err) {
-                throw err;
+                return reject(err);
             }
             resolve(data);
         });
