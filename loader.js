@@ -1,5 +1,5 @@
 var loaderUtils = require('loader-utils');
-var kotlinCopiler = require('./kotlin-compiler');
+var kotlinCopiler = require('./compiler/kotlin-compiler');
 
 module.exports = function () {
     this.cacheable();

@@ -50,7 +50,7 @@
 /* 1 */
 /***/ function(module, exports) {
 
-	(function (Kotlin) {
+	var _tmp = function (Kotlin) {
 	  'use strict';
 	  var _ = Kotlin.defineRootPackage(null, /** @lends _ */ {
 	    org: Kotlin.definePackage(null, /** @lends _.org */ {
@@ -63,7 +63,8 @@
 	  });
 	  Kotlin.defineModule('_tmp', _);
 	  _.org.test.main_kand9s$([]);
-	}(Kotlin));
+	  return _;
+	}(kotlin);
 
 
 /***/ }
