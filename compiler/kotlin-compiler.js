@@ -23,6 +23,8 @@ function compile(sourceFilePath) {
             [
                 '-output', 
                 TMP_FILE_NAME, 
+                '-module-kind',
+                'commonjs',
 
                 sourceFilePath
             ], 
