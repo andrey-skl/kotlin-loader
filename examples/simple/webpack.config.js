@@ -1,5 +1,7 @@
 var path = require('path');
 
+var kotlinLoader = require.resolve('../../loader');
+
 module.exports = {
     context: __dirname,
     entry: './entry',
@@ -7,12 +9,9 @@ module.exports = {
         path: __dirname + '/dist',
         filename: 'build.js'
     },
-    resolveLoader: {
-        fallback: path.resolve(__dirname, '../../')
-    },
     module: {
         loaders: [
-            {test: /\.kt$/, loaders: ['loader']}
+            {test: /\.kt$/, loaders: [kotlinLoader]}
         ]
     }
 };

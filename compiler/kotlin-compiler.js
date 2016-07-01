@@ -19,7 +19,15 @@ function onCompilationFinish() {
 
 function compile(sourceFilePath) {
     return new Promise(function (resolve, reject) {
-        var compilation = spawn(`compiler/bin/kotlinc-js`, ['-output', TMP_FILE_NAME, sourceFilePath], {stdio: [process.stdin, process.stdout, 'pipe']});
+        var compilation = spawn(`./compiler/bin/kotlinc-js`, 
+            [
+                '-output', 
+                TMP_FILE_NAME, 
+
+                sourceFilePath
+            ], 
+            {stdio: [process.stdin, process.stdout, 'pipe']}
+        );
         var hasErrors = false;
         var errors = '';
 
