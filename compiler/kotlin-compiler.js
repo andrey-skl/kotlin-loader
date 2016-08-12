@@ -41,6 +41,7 @@ function compile(sourceFilePath) {
         compilation.on('error', function (err) {
             hasErrors = true;
             errors += 'kotlin-js failed. do you have kotlin installed?';
+            console.error('error from kotlin => ', err)
         });
 
         compilation.on('close', function () {
