@@ -1,8 +1,8 @@
 {
   "name": "webpack-kotlin-loader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Webpack loader allows importing kotlin files in JS",
-  "main": "index.js",
+  "main": "loader.js",
   "scripts": {
     "compile-simple": "rm -rf examples/simple/dist && webpack --config examples/simple/webpack.config",
     "test": "bash ./acceptance-test.sh"
