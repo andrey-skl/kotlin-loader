@@ -11,7 +11,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'kotlin': require.resolve('../../kotlin-mock')
+            'kotlin': require.resolve('../../kotlin-runtime')
         }
     },
     module: {
