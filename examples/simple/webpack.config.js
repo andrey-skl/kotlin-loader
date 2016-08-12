@@ -1,10 +1,13 @@
 var path = require('path');
-
+var webpack = require('webpack');
 var kotlinLoader = require.resolve('../../loader');
 
 module.exports = {
     context: __dirname,
-    entry: './entry',
+    entry: {
+        main: './entry',
+        vendor: ['kotlin']
+    },
     output: {
         path: __dirname + '/dist',
         filename: 'build.js'
@@ -18,5 +21,11 @@ module.exports = {
         loaders: [
             {test: /\.kt$/, loaders: [kotlinLoader]}
         ]
-    }
+    },
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.build.js'
+        })
+    ]
 };
