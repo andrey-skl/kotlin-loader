@@ -19,7 +19,7 @@ function onCompilationFinish() {
 
 function compile(sourceFilePath) {
     return new Promise(function (resolve, reject) {
-        var compilation = spawn(`./compiler/bin/kotlinc-js`, 
+        var compilation = spawn(__dirname + `/bin/kotlinc-js`,
             [
                 '-output', 
                 TMP_FILE_NAME, 
@@ -41,7 +41,7 @@ function compile(sourceFilePath) {
         compilation.on('error', function (err) {
             hasErrors = true;
             errors += 'kotlin-js failed. do you have kotlin installed?';
-            console.error('error from kotlin => ', err)
+            errors += JSON.stringify(err);
         });
 
         compilation.on('close', function () {
