@@ -4,7 +4,7 @@
 
 Hello. This package is not ready for using. If you're interested about it, contact me.
 
-See [examples](./examples/).
+See [examples](https://github.com/huston007/kotlin-loader/tree/master/examples/simple).
 
 Usage:
 

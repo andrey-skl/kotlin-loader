@@ -12,6 +12,14 @@
     "kotlin",
     "loader"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huston007/kotlin-loader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/huston007/kotlin-loader/issues"
+  },
+  "homepage": "https://github.com/huston007/kotlin-loader#readme",
   "author": "Andrey Skladchikov",
   "license": "MIT",
   "devDependencies": {
