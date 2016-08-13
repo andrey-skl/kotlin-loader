@@ -29,7 +29,7 @@ module.exports = {
     resolve: {
         alias: {
             //Since compiled kotlin code tries to `require('kotlin')`, we have to tell him where it is
-            'kotlin': require.resolve('../../kotlin-runtime')
+            'kotlin': require.resolve('webpack-kotlin-loader/kotlin-runtime')
         }
     },
     module: {
