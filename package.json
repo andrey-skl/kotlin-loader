@@ -28,5 +28,8 @@
   },
   "engines": {
     "node": ">=5.5"
+  },
+  "dependencies": {
+    "source-map-resolve": "0.5.0"
   }
 }

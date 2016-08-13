@@ -1,18 +1,31 @@
-var spawn = require('child_process').spawn;
-var fs = require('fs');
+const spawn = require('child_process').spawn;
+const fs = require('fs');
 
-var TMP_FILE_NAME = `${__dirname}/_tmp.js`;
+const TMP_FILE_NAME = `${__dirname}/_compiled-tmp.js`;
+const TMP_SOURCE_MAP_FILE_NAME = `${TMP_FILE_NAME}.map`;
+const FILE_PROTO_PREFIX = 'file://';
+
+function dropFilePrefixFromSourceUrls(sources) {
+    return sources.map(path => {
+        if (path.indexOf(FILE_PROTO_PREFIX) === 0) {
+            return path.split(FILE_PROTO_PREFIX)[1];
+        }
+        return path;
+    });
+}
 
 function onCompilationFinish() {
     return new Promise((resolve, reject) => {
 
-        fs.readFile(`${TMP_FILE_NAME}.map`, (err, sourceMapBuffer) => {
+        fs.readFile(TMP_SOURCE_MAP_FILE_NAME, (err, sourceMapBuffer) => {
             fs.readFile(TMP_FILE_NAME, (err, compiledSourceBuffer) => {
                 if (err) {
                     return reject(err);
                 }
-                const sourceMap = JSON.parse(sourceMapBuffer.toString());
                 const compiledSource = compiledSourceBuffer.toString();
+                const sourceMap = JSON.parse(sourceMapBuffer.toString());
+
+                sourceMap.sources = dropFilePrefixFromSourceUrls(sourceMap.sources);
 
                 resolve({sourceMap, compiledSource});
             });
