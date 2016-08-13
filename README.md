@@ -1,8 +1,6 @@
 # kotlin-loader
 
-###Kotlin webpack loader that allows to import Kotlin files into your JS
-
-Hello. This package is not ready for using. If you're interested about it, contact me.
+###Kotlin webpack loader that allows importing Kotlin package into your JS
 
 See [examples](https://github.com/huston007/kotlin-loader/tree/master/examples/simple).
 
@@ -40,7 +38,8 @@ module.exports = {
                 test: /\.kt$/,
                 loaders: [
                     'webpack-kotlin-loader?srcRoot=' + path.resolve(__dirname, './src')
-                ]}
+                ]
+            }
         ]
     }
 };
