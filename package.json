@@ -1,6 +1,6 @@
 {
   "name": "webpack-kotlin-loader",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Webpack loader allows importing kotlin files in JS",
   "main": "loader.js",
   "scripts": {
