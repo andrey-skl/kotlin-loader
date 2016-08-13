@@ -14,17 +14,20 @@ webpackJsonp([0],[
 	    org: Kotlin.definePackage(null, /** @lends _.org */ {
 	      test: Kotlin.definePackage(null, /** @lends _.org.test */ {
 	        main_kand9s$: function (args) {
-	          Kotlin.println('Hello, world!');
+	          Kotlin.println(_.org.test.getSomething());
+	        },
+	        getSomething: function () {
+	          return 'Hello, world!';
 	        }
 	      })
 	    })
 	  });
-	  Kotlin.defineModule('_tmp', _);
+	  Kotlin.defineModule('_compiled-tmp', _);
 	  _.org.test.main_kand9s$([]);
 	  return _;
 	}(__webpack_require__(2));
 
-	//@ sourceMappingURL=_tmp.js.map
+	//@ sourceMappingURL=_compiled-tmp.js.map
 
 
 /***/ }

@@ -20,7 +20,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            {test: /\.kt$/, loaders: [kotlinLoader]}
+            {test: /\.kt$/, loaders: [kotlinLoader + '?srcRoot=' + path.resolve(__dirname, './')]}
         ]
     },
     plugins: [

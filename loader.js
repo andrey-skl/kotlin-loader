@@ -20,8 +20,9 @@ function fillEmptySourcesContent(compileRes) {
 }
 
 module.exports = function (source) {
-    const addDependency = this.addDependency.bind(this);
     this.cacheable();
+    const addDependency = this.addDependency.bind(this);
+    const query = loaderUtils.parseQuery(this.query);
     const callback = this.async();
 
     if (!callback) {
@@ -30,7 +31,7 @@ module.exports = function (source) {
 
     const filename = loaderUtils.getRemainingRequest(this);
 
-    kotlinCopiler.compile(filename)
+    kotlinCopiler.compile([filename, query.srcRoot])
         .then(fillEmptySourcesContent)
         .then(result => {
             result.sourceMap.sources.forEach(addDependency);

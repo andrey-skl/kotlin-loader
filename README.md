@@ -36,11 +36,16 @@ module.exports = {
     },
     module: {
         loaders: [
-            {test: /\.kt$/, loaders: ['webpack-kotlin-loader']}
+            {
+                test: /\.kt$/,
+                loaders: [
+                    'webpack-kotlin-loader?srcRoot=' + path.resolve(__dirname, './src')
+                ]}
         ]
     }
 };
 ```
+Where `srcRoot` should be set to root directory which contains your kotlin sources.
 
 Then you could import your kotlin entry point somewhere:
 ```js

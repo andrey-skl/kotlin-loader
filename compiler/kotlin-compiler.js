@@ -37,7 +37,7 @@ function onCompilationFinish() {
 
 }
 
-function compile(sourceFilePath) {
+function compile(sourceFilePathes) {
     return new Promise((resolve, reject) => {
         var compilation = spawn(__dirname + `/bin/kotlinc-js`,
             [
@@ -45,10 +45,10 @@ function compile(sourceFilePath) {
                 TMP_FILE_NAME,
                 '-source-map',
                 '-module-kind',
-                'commonjs',
-
-                sourceFilePath
-            ],
+                'commonjs'
+            ]
+                .concat(sourceFilePathes)
+                .filter(str => !!str),
             {stdio: [process.stdin, process.stdout, 'pipe']}
         );
         var hasErrors = false;
