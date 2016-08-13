@@ -5,6 +5,9 @@ const TMP_FILE_NAME = `${__dirname}/_compiled-tmp.js`;
 const TMP_SOURCE_MAP_FILE_NAME = `${TMP_FILE_NAME}.map`;
 const FILE_PROTO_PREFIX = 'file://';
 
+const TURN_ON_RED_COLOR = '\033[31m';
+const RESET_COLOR = '\033[0m';
+
 function dropFilePrefixFromSourceUrls(sources) {
     return sources.map(path => {
         if (path.indexOf(FILE_PROTO_PREFIX) === 0) {
@@ -66,7 +69,7 @@ function compile(sourceFilePath) {
             if (hasErrors === false) {
                 resolve(onCompilationFinish());
             } else {
-                console.error('\n kotlin-js compilation failed. \n', errors);
+                console.error(TURN_ON_RED_COLOR, '\n kotlin-js compilation failed. \n', errors, RESET_COLOR);
                 reject(errors);
             }
         });
