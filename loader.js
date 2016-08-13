@@ -20,18 +20,22 @@ function fillEmptySourcesContent(compileRes) {
 }
 
 module.exports = function (source) {
+    const addDependency = this.addDependency.bind(this);
     this.cacheable();
-    var callback = this.async();
+    const callback = this.async();
 
     if (!callback) {
         throw 'webpack-kotlin-loader currently only supports async mode.';
     }
 
-    var filename = loaderUtils.getRemainingRequest(this);
-    this.addDependency(filename);
+    const filename = loaderUtils.getRemainingRequest(this);
 
     kotlinCopiler.compile(filename)
         .then(fillEmptySourcesContent)
+        .then(result => {
+            result.sourceMap.sources.forEach(addDependency);
+            return result;
+        })
         .then(result => callback(null, result.compiledSource, result.sourceMap))
         .catch(callback);
 };
