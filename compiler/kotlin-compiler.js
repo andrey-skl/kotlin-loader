@@ -11,7 +11,7 @@ function onCompilationFinish() {
                 if (err) {
                     return reject(err);
                 }
-                const sourceMap = sourceMapBuffer.toString();
+                const sourceMap = JSON.parse(sourceMapBuffer.toString());
                 const compiledSource = compiledSourceBuffer.toString();
 
                 resolve({sourceMap, compiledSource});

@@ -1,7 +1,7 @@
 var loaderUtils = require('loader-utils');
 var kotlinCopiler = require('./compiler/kotlin-compiler');
 
-module.exports = function () {
+module.exports = function (source) {
     this.cacheable();
     var callback = this.async();
 
@@ -14,7 +14,9 @@ module.exports = function () {
 
     kotlinCopiler.compile(filename)
         .then(res => {
-            callback(null, res.compiledSource, res.sourceMap);
+            var resultSourceMap = res.sourceMap;
+            resultSourceMap.sourcesContent = [source];
+            callback(null, res.compiledSource, resultSourceMap);
         })
         .catch(callback);
 };
