@@ -6,15 +6,15 @@ var TMP_FILE_NAME = `${__dirname}/_tmp.js`;
 function onCompilationFinish() {
     return new Promise((resolve, reject) => {
 
-        fs.readFile(`${TMP_FILE_NAME}.map`, (err, sorceMap) => {
-            fs.readFile(TMP_FILE_NAME, (err, compiledSource) => {
+        fs.readFile(`${TMP_FILE_NAME}.map`, (err, sourceMapBuffer) => {
+            fs.readFile(TMP_FILE_NAME, (err, compiledSourceBuffer) => {
                 if (err) {
                     return reject(err);
                 }
-                resolve({
-                    sorceMap: sorceMap.toString(),
-                    compiledSource: compiledSource.toString()
-                });
+                const sourceMap = sourceMapBuffer.toString();
+                const compiledSource = compiledSourceBuffer.toString();
+
+                resolve({sourceMap, compiledSource});
             });
         });
     });

@@ -7,6 +7,13 @@ Hello. This package is not ready for using. If you're interested about it, conta
 See [examples](./examples/).
 
 Usage:
+
+```sh
+npm i webpack-kotlin-loader --save-dev
+```
+
+
+`webpack.config.js`
 ```js
 var path = require('path');
 var webpack = require('webpack');
@@ -33,4 +40,9 @@ module.exports = {
         ]
     }
 };
+```
+
+Then you could import your kotlin entry point somewhere:
+```js
+require('./app/app.kt');
 ```

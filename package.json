@@ -17,5 +17,8 @@
   "devDependencies": {
     "webpack": "^1.13.1",
     "loader-utils": "^0.2.15"
+  },
+  "engines": {
+    "node": ">=5.5"
   }
 }
