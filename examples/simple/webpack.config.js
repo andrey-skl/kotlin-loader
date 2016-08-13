@@ -4,7 +4,7 @@ var kotlinLoader = require.resolve('../../loader');
 
 module.exports = {
     context: __dirname,
-    'devtool': 'source-map',
+    devtool: 'source-map',
     entry: {
         main: './entry',
         vendor: ['kotlin']
