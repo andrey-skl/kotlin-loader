@@ -8,8 +8,6 @@ module.exports = function () {
     this.addDependency(filename);
 
     kotlinCopiler.compile(filename)
-        .then(function (res) {
-            callback(null, res)
-        })
+        .then(res => callback(null, res.compiledSource, res.sorceMap))
         .catch(callback);
 };

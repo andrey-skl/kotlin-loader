@@ -4,13 +4,17 @@ var fs = require('fs');
 var TMP_FILE_NAME = `${__dirname}/_tmp.js`;
 
 function onCompilationFinish() {
-    return new Promise(function (resolve, reject) {
-        fs.readFile(TMP_FILE_NAME, function (err, data) {
-            if (err) {
-                return reject(err);
-            }
-            fs.unlink(TMP_FILE_NAME, function () {
-                resolve(data);
+    return new Promise((resolve, reject) => {
+
+        fs.readFile(`${TMP_FILE_NAME}.map`, (err, sorceMap) => {
+            fs.readFile(TMP_FILE_NAME, (err, compiledSource) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve({
+                    sorceMap: sorceMap.toString(),
+                    compiledSource: compiledSource.toString()
+                });
             });
         });
     });
@@ -18,38 +22,38 @@ function onCompilationFinish() {
 }
 
 function compile(sourceFilePath) {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         var compilation = spawn(__dirname + `/bin/kotlinc-js`,
             [
-                '-output', 
-                TMP_FILE_NAME, 
+                '-output',
+                TMP_FILE_NAME,
+                '-source-map',
                 '-module-kind',
                 'commonjs',
 
                 sourceFilePath
-            ], 
+            ],
             {stdio: [process.stdin, process.stdout, 'pipe']}
         );
         var hasErrors = false;
         var errors = '';
 
-        compilation.stderr.on('data', function (data) {
+        compilation.stderr.on('data', (data) => {
             hasErrors = true;
             errors += data.toString();
         });
 
-        compilation.on('error', function (err) {
+        compilation.on('error', (err) => {
             hasErrors = true;
             errors += 'kotlin-js failed. do you have kotlin installed?';
             errors += JSON.stringify(err);
         });
 
-        compilation.on('close', function () {
+        compilation.on('close', () => {
             if (hasErrors === false) {
                 resolve(onCompilationFinish());
             } else {
-                console.error('\n kotlin-js compilation failed. \n');
-                console.error(errors);
+                console.error('\n kotlin-js compilation failed. \n', errors);
                 reject(errors);
             }
         });
