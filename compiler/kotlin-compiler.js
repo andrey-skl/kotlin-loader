@@ -47,8 +47,7 @@ function compile(sourceFilePathes) {
                 '-module-kind',
                 'commonjs'
             ]
-                .concat(sourceFilePathes)
-                .filter(str => !!str),
+                .concat(sourceFilePathes),
             {stdio: [process.stdin, process.stdout, 'pipe']}
         );
         var hasErrors = false;

@@ -31,7 +31,7 @@ module.exports = function (source) {
 
     const filename = loaderUtils.getRemainingRequest(this);
 
-    kotlinCopiler.compile([filename, query.srcRoot])
+    kotlinCopiler.compile([filename, query.srcRoot].concat(query.srcRoots).filter(str => !!str),)
         .then(fillEmptySourcesContent)
         .then(result => {
             result.sourceMap.sources.forEach(addDependency);
