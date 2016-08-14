@@ -37,17 +37,39 @@ function onCompilationFinish() {
 
 }
 
-function compile(sourceFilePathes) {
+function convertOptionsIntoArguments(options) {
+    var argumentsList = [
+        '-output',
+        TMP_FILE_NAME,
+        options.sourceMaps ? '-source-map' : null,
+        options.noStdlib ? '-no-stdlib ' : null,
+        options.metaInfo ? '-meta-info' : null,
+        options.kjsm ? '-kjsm' : null,
+        options.noWarn ? '-nowarn' : null,
+        options.verbose ? '-verbose' : null
+    ];
+
+    if (options.main) {
+        argumentsList = argumentsList.concat('-main', options.main);
+    }
+
+    if (options.moduleKind) {
+        argumentsList = argumentsList.concat('-module-kind', options.moduleKind);
+    }
+
+    if (options.libraryFiles && options.libraryFiles.length) {
+        argumentsList = argumentsList.concat('-library-files', options.libraryFiles.join(','))
+    }
+
+    argumentsList = argumentsList.concat(options.sources)
+
+    return argumentsList.filter(arg => !!arg);
+}
+
+function compile(options) {
     return new Promise((resolve, reject) => {
         var compilation = spawn(__dirname + `/bin/kotlinc-js`,
-            [
-                '-output',
-                TMP_FILE_NAME,
-                '-source-map',
-                '-module-kind',
-                'commonjs'
-            ]
-                .concat(sourceFilePathes),
+            convertOptionsIntoArguments(options),
             {stdio: [process.stdin, process.stdout, 'pipe']}
         );
         var hasErrors = false;

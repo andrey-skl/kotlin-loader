@@ -19,7 +19,7 @@ function fillEmptySourcesContent(compileRes) {
     });
 }
 
-module.exports = function (source) {
+module.exports = function (sourceCode) {
     this.cacheable();
     const addDependency = this.addDependency.bind(this);
     const query = loaderUtils.parseQuery(this.query);
@@ -31,7 +31,14 @@ module.exports = function (source) {
 
     const filename = loaderUtils.getRemainingRequest(this);
 
-    kotlinCopiler.compile([filename, query.srcRoot].concat(query.srcRoots).filter(str => !!str))
+    const sourcePathes = [filename, query.srcRoot].concat(query.srcRoots).filter(str => !!str);
+
+    kotlinCopiler.compile({
+        sources: sourcePathes,
+        sourceMaps: true,
+        moduleKind: 'commonjs',
+        libraryFiles: query.libraryFiles || []
+    })
         .then(fillEmptySourcesContent)
         .then(result => {
             result.sourceMap.sources.forEach(addDependency);
