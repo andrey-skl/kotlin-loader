@@ -4,7 +4,7 @@ var sourceMapResolve = require("source-map-resolve")
 var fs = require('fs');
 var path = require('path');
 
-var SOURCE_MAP_RELATED_PATH = path.resolve('./', './compiler/doesnt-matter.js');
+var SOURCE_MAP_RELATED_PATH = path.resolve('./', './compiler/file-name-doesnt-matter.js');
 
 function fillEmptySourcesContent(compileRes) {
     return new Promise((resolve, reject) => {
