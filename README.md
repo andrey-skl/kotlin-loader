@@ -37,7 +37,10 @@ module.exports = {
             {
                 test: /\.kt$/,
                 loaders: [
-                    'webpack-kotlin-loader?srcRoot=' + path.resolve(__dirname, './src')
+                    'webpack-kotlin-loader?' + JSON.stringify({
+                        srcRoot: path.resolve(__dirname, './src'),
+                        libraryFiles: [path.resolve(__dirname, './lib/reakt.jar')]
+                    })
                 ]
             }
         ]
