@@ -26,7 +26,7 @@ module.exports = function (sourceCode) {
     const callback = this.async();
 
     if (!callback) {
-        throw 'webpack-kotlin-loader currently only supports async mode.';
+        throw new Error('webpack-kotlin-loader currently only supports async mode.');
     }
 
     const filename = loaderUtils.getRemainingRequest(this);
