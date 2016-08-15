@@ -1,5 +1,5 @@
 var loaderUtils = require('loader-utils');
-var kotlinCopiler = require('./compiler/kotlin-compiler');
+var kotlinCompiler = require('./compiler/kotlin-compiler');
 var sourceMapResolve = require("source-map-resolve")
 var fs = require('fs');
 var path = require('path');
@@ -33,7 +33,7 @@ module.exports = function (sourceCode) {
 
     const sourcePathes = [filename, query.srcRoot].concat(query.srcRoots).filter(str => !!str);
 
-    kotlinCopiler.compile({
+    kotlinCompiler.compile({
         sources: sourcePathes,
         sourceMaps: true,
         moduleKind: 'commonjs',
