@@ -33,12 +33,12 @@ module.exports = function (sourceCode) {
 
     const sourcePathes = [filename, query.srcRoot].concat(query.srcRoots).filter(str => !!str);
 
-    kotlinCompiler.compile({
+    kotlinCompiler.compile(Object.assign({
         sources: sourcePathes,
         sourceMaps: true,
         moduleKind: 'commonjs',
         libraryFiles: query.libraryFiles || []
-    })
+    }, query.compilerOptions))
         .then(fillEmptySourcesContent)
         .then(result => {
             result.sourceMap.sources.forEach(addDependency);
