@@ -1,10 +1,12 @@
-var loaderUtils = require('loader-utils');
-var kotlinCompiler = require('./compiler/kotlin-compiler');
-var sourceMapResolve = require("source-map-resolve")
-var fs = require('fs');
-var path = require('path');
+const loaderUtils = require('loader-utils');
+const kotlinCompiler = require('./compiler/kotlin-compiler');
+const sourceMapResolve = require("source-map-resolve")
+const fs = require('fs');
+const path = require('path');
 
-var SOURCE_MAP_RELATED_PATH = path.resolve('./', './compiler/file-name-doesnt-matter.js');
+const SOURCE_MAP_RELATED_PATH = path.resolve('./', './compiler/file-name-doesnt-matter.js');
+
+const dependencyCache = new Map();
 
 function fillEmptySourcesContent(compileRes) {
     return new Promise((resolve, reject) => {
@@ -17,6 +19,15 @@ function fillEmptySourcesContent(compileRes) {
             resolve(compileRes);
         });
     });
+}
+
+function addAndCacheDependencies(entryFileName, pathes, addDependency) {
+    pathes.forEach(addDependency);
+    dependencyCache.set(entryFileName, pathes);
+}
+
+function addCachedDependencies(entryFileName, addDependency) {
+    dependencyCache.get(entryFileName).forEach(addDependency);
 }
 
 module.exports = function (sourceCode) {
@@ -41,9 +52,12 @@ module.exports = function (sourceCode) {
     }, query.compilerOptions))
         .then(fillEmptySourcesContent)
         .then(result => {
-            result.sourceMap.sources.forEach(addDependency);
+            addAndCacheDependencies(filename, result.sourceMap.sources, addDependency);
             return result;
         })
         .then(result => callback(null, result.compiledSource, result.sourceMap))
-        .catch(callback);
+        .catch(err => {
+            addCachedDependencies(filename, addDependency);
+            callback(err);
+        });
 };
