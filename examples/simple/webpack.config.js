@@ -13,11 +13,6 @@ module.exports = {
         path: __dirname + '/dist',
         filename: 'build.js'
     },
-    resolve: {
-        alias: {
-            'kotlin': require.resolve('../../kotlin-runtime')
-        }
-    },
     module: {
         loaders: [
             {test: /\.kt$/, loaders: [kotlinLoader + '?srcRoot=' + path.resolve(__dirname, './')]}

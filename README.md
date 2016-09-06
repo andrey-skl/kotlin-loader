@@ -10,7 +10,12 @@ Usage:
 npm i webpack-kotlin-loader --save-dev
 ```
 
+Do not forget to install kotlin runtime:
+```sh
+npm i kotlin --save
+```
 
+Usage:
 `webpack.config.js`
 ```js
 var path = require('path');
@@ -25,12 +30,6 @@ module.exports = {
     output: {
         path: __dirname + '/dist',
         filename: 'build.js'
-    },
-    resolve: {
-        alias: {
-            //Since compiled kotlin code tries to `require('kotlin')`, we have to tell him where it is
-            'kotlin': require.resolve('webpack-kotlin-loader/kotlin-runtime')
-        }
     },
     module: {
         loaders: [
