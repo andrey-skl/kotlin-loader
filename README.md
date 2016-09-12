@@ -1,8 +1,10 @@
 # kotlin-loader
 
-###Kotlin webpack loader that allows importing Kotlin package into your JS
+### Kotlin webpack loader that allows importing Kotlin package into your JS
 
-See [examples](https://github.com/huston007/kotlin-loader/tree/master/examples/simple).
+#### Please note that this loader is not production ready, it's still under development.
+
+See [build example](https://github.com/huston007/kotlin-loader/tree/master/examples/simple), [app example](https://github.com/huston007/kotlin-loader-example).
 
 Usage:
 
