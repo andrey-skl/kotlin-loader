@@ -4,6 +4,8 @@
 
 #### Please note that this loader is not production ready, it's still under development.
 
+It uses kotlinc-js compiler to convert Kotlin code to JavaScript. Note that Kotlin codebase is not file-based, but package-based. So it's impossible to compile file-to-file at the moment, so you should import your kotlin entry point once.
+
 See [build example](https://github.com/huston007/kotlin-loader/tree/master/examples/simple), [app example](https://github.com/huston007/kotlin-loader-example).
 
 Usage:
