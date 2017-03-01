@@ -56,7 +56,7 @@ function convertOptionsIntoArguments(options) {
     if (options.moduleKind) {
         argumentsList = argumentsList.concat('-module-kind', options.moduleKind);
     }
-console.log('>>>>options>>>', options)
+
     if (options.libraries && options.libraries.length) {
         argumentsList = argumentsList.concat('-libraries', options.libraries.join(','))
     }
