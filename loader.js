@@ -49,7 +49,7 @@ module.exports = function (sourceCode) {
         sources: sourcePathes,
         sourceMaps: true,
         moduleKind: 'commonjs',
-        libraryFiles: options.libraryFiles || []
+        libraries: options.libraries || []
     }, options.compilerOptions))
         .then(fillEmptySourcesContent)
         .then(result => {
