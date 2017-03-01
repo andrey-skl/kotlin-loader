@@ -33,7 +33,8 @@ function addCachedDependencies(entryFileName, addDependency) {
 module.exports = function (sourceCode) {
     this.cacheable();
     const addDependency = this.addDependency.bind(this);
-    const query = loaderUtils.parseQuery(this.query);
+    const options = loaderUtils.getOptions(this);
+
     const callback = this.async();
 
     if (!callback) {
@@ -42,14 +43,14 @@ module.exports = function (sourceCode) {
 
     const filename = loaderUtils.getRemainingRequest(this);
 
-    const sourcePathes = [filename, query.srcRoot].concat(query.srcRoots).filter(str => !!str);
+    const sourcePathes = [filename, options.srcRoot].concat(options.srcRoots).filter(str => !!str);
 
     kotlinCompiler.compile(Object.assign({
         sources: sourcePathes,
         sourceMaps: true,
         moduleKind: 'commonjs',
-        libraryFiles: query.libraryFiles || []
-    }, query.compilerOptions))
+        libraryFiles: options.libraryFiles || []
+    }, options.compilerOptions))
         .then(fillEmptySourcesContent)
         .then(result => {
             addAndCacheDependencies(filename, result.sourceMap.sources, addDependency);
