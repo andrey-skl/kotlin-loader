@@ -19,36 +19,39 @@ Do not forget to install kotlin runtime:
 npm i kotlin --save
 ```
 
-Usage:
+Usage (for webpack 2):
 `webpack.config.js`
 ```js
 var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    context: __dirname,
-    devtool: 'source-map',
-    entry: {
-        main: './entry'
-    },
-    output: {
-        path: __dirname + '/dist',
-        filename: 'build.js'
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.kt$/,
-                loaders: [
-                    'webpack-kotlin-loader?' + JSON.stringify({
-                        srcRoot: path.resolve(__dirname, './src'),
-                        libraryFiles: [path.resolve(__dirname, './lib/reakt.jar')]
-                    })
-                ]
+  context: __dirname,
+  devtool: 'source-map',
+  entry: {
+    main: './entry'
+  },
+  output: {
+    path: __dirname + '/dist',
+    filename: 'build.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.kt$/,
+        use: [
+          {
+            loader: 'webpack-kotlin-loader',
+            options: {
+              srcRoot: path.resolve(__dirname, './')
             }
+          }
         ]
-    }
+      }
+    ]
+  }
 };
+
 ```
 Where `srcRoot` should be set to root directory which contains your kotlin sources.
 
