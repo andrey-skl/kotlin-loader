@@ -1,6 +1,6 @@
 {
   "name": "webpack-kotlin-loader",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Webpack loader that allows importing kotlin files in JS",
   "main": "loader.js",
   "scripts": {
@@ -24,13 +24,13 @@
   "license": "MIT",
   "devDependencies": {
     "kotlin": "1.1.0",
-    "loader-utils": "1.0.2",
     "webpack": "^2.2"
   },
   "engines": {
     "node": ">=5.5"
   },
   "dependencies": {
+    "loader-utils": "1.0.2",
     "source-map-resolve": "0.5.0"
   }
 }
