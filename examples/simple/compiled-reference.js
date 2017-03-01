@@ -3,24 +3,23 @@ webpackJsonp([0],[
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = function (Kotlin) {
+(function (_, Kotlin) {
   'use strict';
-  var _ = Kotlin.defineRootPackage(null, /** @lends _ */ {
-    org: Kotlin.definePackage(null, /** @lends _.org */ {
-      test: Kotlin.definePackage(null, /** @lends _.org.test */ {
-        main_kand9s$: function (args) {
-          Kotlin.println(_.org.test.getSomething());
-        },
-        getSomething: function () {
-          return 'Hello, world!';
-        }
-      })
-    })
-  });
+  var println = Kotlin.kotlin.io.println_s8jyv4$;
+  function main(args) {
+    println(getSomething());
+  }
+  function getSomething() {
+    return 'Hello, world!';
+  }
+  var package$org = _.org || (_.org = {});
+  var package$test = package$org.test || (package$org.test = {});
+  package$test.main_kand9s$ = main;
+  package$test.getSomething = getSomething;
   Kotlin.defineModule('_compiled-tmp', _);
-  _.org.test.main_kand9s$([]);
+  main([]);
   return _;
-}(__webpack_require__(0));
+}(module.exports, __webpack_require__(0)));
 
 //@ sourceMappingURL=_compiled-tmp.js.map
 
