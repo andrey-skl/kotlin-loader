@@ -57,8 +57,8 @@ function convertOptionsIntoArguments(options) {
         argumentsList = argumentsList.concat('-module-kind', options.moduleKind);
     }
 
-    if (options.libraryFiles && options.libraryFiles.length) {
-        argumentsList = argumentsList.concat('-library-files', options.libraryFiles.join(','))
+    if (options.libraries && options.libraries.length) {
+        argumentsList = argumentsList.concat('-libraries', options.libraryFiles.join(','))
     }
 
     argumentsList = argumentsList.concat(options.sources)
