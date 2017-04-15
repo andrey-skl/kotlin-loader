@@ -24,7 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "kotlin": "1.1.0",
-    "webpack": "^2.2"
+    "webpack": "^2.4"
   },
   "engines": {
     "node": ">=5.5"
