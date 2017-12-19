@@ -1,6 +1,9 @@
-# kotlin-loader
+# kotlin-loader [Deprecated]
 
-### Kotlin webpack loader that allows importing Kotlin package into your JS
+## Please use [kotlin-webpack-plugin](https://www.npmjs.com/package/kotlin-webpack-plugin) instead
+
+
+#### Kotlin webpack loader that allows importing Kotlin package into your JS
 
 #### Please note that this loader is not production ready, it's still under development.
 
